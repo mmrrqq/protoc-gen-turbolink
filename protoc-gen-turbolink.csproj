@@ -1,15 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">  
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F81F5F0C-C258-4DBD-AABB-CDD9730D171D}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Exe</OutputType>    
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
     <RootNamespace>protoc_gen_turbolink</RootNamespace>
-    <AssemblyName>protoc-gen-turbolink</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <AssemblyName>protoc_gen_turbolink</AssemblyName>
+    <TargetFramework>net8.0</TargetFramework>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <!-- <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
@@ -28,9 +29,9 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperEnabled>true</BootstrapperEnabled> -->
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <!-- <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -48,9 +49,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+  </PropertyGroup> -->
   <ItemGroup>
-    <Reference Include="System">
+    <!-- <Reference Include="System">
       <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
     </Reference>
@@ -61,24 +62,26 @@
     <Reference Include="System.Data">
       <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
-    </Reference>
+    </Reference> -->
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.19.0" />
-    <PackageReference Include="Grpc.Core" Version="2.46.6" />
-    <PackageReference Include="System.Buffers" Version="4.5.1" />
+    <PackageReference Include="Google.Protobuf" Version="3.27.2"/>
+    <PackageReference Include="Grpc.Core" Version="2.46.6"/>
+    <!-- <PackageReference Include="System.Buffers" Version="4.5.1" />
     <PackageReference Include="System.Memory" Version="4.5.5" />
     <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
-    <PackageReference Include="ILMerge" Version="3.0.41" />
-    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
-    <PackageReference Include="System.Text.Json" Version="7.0.2" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" /> -->
+    <PackageReference Include="System.CodeDom" />
+    <PackageReference Include="ILMerge"/>
+    <PackageReference Include="TextTemplating.Core" Version="5.0.0" /> 
+    <!-- <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+    <PackageReference Include="System.Text.Json" Version="7.0.2" /> -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <!-- <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProtobufPlugin.cs" />
-    <Compile Include="Template\ClientCPP.cs">
+    <Compile Include="ProtobufPlugin.cs" /> -->
+    <!-- <Compile Include="Template\ClientCPP.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ClientCPP.tt</DependentUpon>
@@ -147,19 +150,19 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ServicePrivateH.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Template\TemplateModel.cs" />
+    </Compile> -->
+    <!-- <Compile Include="Template\TemplateModel.cs" />
     <Compile Include="TurboLinkCollection.cs" />
     <Compile Include="TurboLinkGenerator.cs" />
-    <Compile Include="TurboLinkUtils.cs" />
+    <Compile Include="TurboLinkUtils.cs" /> -->
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
+    <!-- <None Include="App.config" /> -->
+    <!-- <None Include="packages.config" /> -->
   </ItemGroup>
-  <ItemGroup>
+  <!-- <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
+  </ItemGroup> -->
   <ItemGroup>
     <Content Include="Template\ClientCPP.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
@@ -219,6 +222,78 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Template\MarshalingH.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MarshalingH.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Template\MarshalingCPP.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MarshalingCPP.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Template\ContextH.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContextH.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Template\ContextCPP.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContextCPP.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Template\ClientH.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClientH.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Template\ClientCPP.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClientCPP.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Template\MessageCPP.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MessageCPP.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Template\MessageH.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MessageH.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Template\NodeCPP.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NodeCPP.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Template\NodeH.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NodeH.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Template\ServiceCPP.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServiceCPP.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Template\ServiceH.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServiceH.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Template\ServicePrivateCPP.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServicePrivateCPP.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Template\ServicePrivateH.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServicePrivateH.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.2">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.6.2 %28x86 and x64%29</ProductName>
@@ -229,10 +304,10 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="packages\Grpc.Core.2.46.5\build\net45\Grpc.Core.targets" Condition="Exists('packages\Grpc.Core.2.46.5\build\net45\Grpc.Core.targets')" />
-  <PropertyGroup>
+  </ItemGroup> -->
+  <!-- <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="packages\Grpc.Core.2.46.5\build\net45\Grpc.Core.targets" Condition="Exists('packages\Grpc.Core.2.46.5\build\net45\Grpc.Core.targets')" /> -->
+  <!-- <PropertyGroup>
     <PostBuildEvent>$(USERPROFILE)\.nuget\packages\ilmerge\3.0.41\tools\net452\ILMerge.exe $(TargetPath) /out:$(ProjectDir)bin\protoc-gen-turbolink.exe $(TargetDir)Google.Protobuf.dll $(TargetDir)System.Memory.dll $(TargetDir)System.Runtime.CompilerServices.Unsafe.dll $(TargetDir)System.Text.Json.dll $(TargetDir)Microsoft.Bcl.AsyncInterfaces.dll $(TargetDir)System.Text.Encodings.Web.dll $(TargetDir)System.Threading.Tasks.Extensions.dll $(TargetDir)System.Buffers.dll</PostBuildEvent>
-  </PropertyGroup>
+  </PropertyGroup> -->
 </Project>
